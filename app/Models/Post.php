@@ -2,40 +2,36 @@
 
 namespace App\Models;
 
-class Post
-{
-    private static $blog_posts = [
-        [
-            'title' => 'Blog',
-            'author' => 'Julian',
-            'body' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.'
-        ],
-        [
-            'title' => 'Blog 2',
-            'author' => 'Julian',
-            'body' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.'
-        ],
-        [
-            'title' => 'Blog 3',
-            'author' => 'Julian',
-            'body' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.'
-        ]
-    ];
+use Illuminate\Database\Eloquent\Model;
 
-    public static function all()
-    {
-        return self::$blog_posts;
+class Post extends Model
+{
+    // protected $fillable = ['title', 'slug', 'author', 'body'];
+    protected $guarded = [];
+
+    public function scopeFilter($query, array $filters) {
+        $query->when($filters['search'] ?? false, function($query, $search) {
+           return $query->where('title', 'like', '%'.$search.'%')->orWhere('body', 'like', '%'.$search.'%');
+        });
+
+        $query->when($filters['category'] ?? false, function($query, $category) {
+            return $query->whereHas('category', function($query) use ($category) {
+                $query->where('slug', $category);
+            });
+        });
+
+        $query->when($filters['author'] ?? false, function($query, $author) {
+            return $query->whereHas('user', function($query) use ($author) {
+                $query->where('username', $author);
+            });
+        }); 
     }
 
-    public static function find($slug)
-    {
-        $posts = self::all();
-        foreach ($posts as $post) {
-            if ($post['slug'] === $slug) {
-                return $post;
-            }
-        }
-        return null;
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
+
+    public function category() {
+        return $this->belongsTo(Category::class);
     }
 }
-

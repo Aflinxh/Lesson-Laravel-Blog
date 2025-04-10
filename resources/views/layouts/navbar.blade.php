@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
-    <div class="container-fluid">
+    <div class="container">
         <a class="navbar-brand" href="#">Blog</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
             data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -15,7 +15,18 @@
                     <a class="nav-link {{ $title == 'About' ? 'active' : '' }}" href="/about">About</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ $title == 'Blog' ? 'active' : '' }}" href="/blog">Blog</a>
+                    <a class="nav-link {{ $title == 'Posts' ? 'active' : '' }}" href="/posts">Posts</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ $title == 'Categories' ? 'active' : '' }}" href="/categories">Categories</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ms-auto text-decoration-none">
+                <li class="nav-item me-3">
+                    <a href="/register" class="text-decoration-none"><i class="bi-person-fill-up"></i> Register</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/login" class="text-decoration-none"><i class="bi-box-arrow-in-right"></i> Login</a>
                 </li>
             </ul>
         </div>

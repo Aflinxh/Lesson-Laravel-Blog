@@ -1,22 +1,19 @@
 @extends('layouts.main')
 
 @section('content')
-    <h1>Hello, world!</h1>
+    <div class="row h-100 align-items-center" id="home">
+        <div class="col-md-6">
+            <h1>Where Blogs Jiggle and Giggle</h1>
+            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ad harum voluptatem dolore accusamus nostrum est quia debitis culpa dolor assumenda, corporis nesciunt, non dolores, provident aliquam reprehenderit rerum. Aliquid, quidem placeat quaerat nemo quod minima ducimus? Corporis odit earum deserunt numquam iure exercitationem molestias similique cum accusamus beatae quos temporibus corrupti, ab reprehenderit. Inventore excepturi, maiores quaerat sed vitae dolorum quo quia porro eos dignissimos voluptatum aliquid voluptates laborum culpa recusandae eum, cumque ipsa laudantium assumenda expedita. Dignissimos magnam alias et facilis quas, voluptates possimus eos tenetur autem consequatur eius nulla inventore asperiores laudantium quam aliquid veritatis nostrum veniam architecto!</p>
 
-    <form>
-        <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Email address</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+            <div class="">
+                <a href="/dashboard" class="btn btn-primary text-white">Getting Started</a>
+                <a href="/posts" class="btn btn-success text-white">Start Reads</a>
+            </div>
         </div>
-        <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">Password</label>
-            <input type="password" class="form-control" id="exampleInputPassword1">
+
+        <div class="col-md-6">
+            <iframe src="https://embed.lottiefiles.com/animation/18945" style="width: 40vw; height: 40vw"></iframe>
         </div>
-        <div class="mb-3 form-check">
-            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-            <label class="form-check-label" for="exampleCheck1">Check me out</label>
-        </div>
-        <button type="submit" class="btn btn-warning">Submit</button>
-    </form>
+    </div>
 @endsection
