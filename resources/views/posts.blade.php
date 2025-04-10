@@ -33,7 +33,7 @@
                         <a href="/posts?category={{ $post->category->slug }}" class="text-decoration-none">{{ $post->category->name }}</a>
                     </small>
                 </p>
-                <p class="card-text">{{ $post['body'] }}</p>
+                <p class="card-text">{!!  $post['excerpt'] !!}</p>
                 <a href="/posts/{{ $post->slug }}" class="text-decoration-none btn btn-primary">Read More</a>
             </div>
         </div>

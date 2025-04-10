@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DashboardPostController;
 use App\Http\Controllers\RegisterController;
 
 Route::get('/', function () {
@@ -41,7 +42,20 @@ Route::post('/register', [RegisterController::class, 'store'])->name('register.p
 
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
+Route::prefix('/dashboard')->middleware('auth')->group(function() {
+    Route::get('/', [DashboardController::class, 'index']);
+
+    Route::prefix('/posts')->group(function() {
+        Route::get('/', [DashboardPostController::class, 'index'])->name('dashboard.posts.index');
+        Route::get('/create', [DashboardPostController::class, 'create'])->name('dashboard.posts.create');
+        Route::post('/', [DashboardPostController::class, 'store'])->name('dashboard.posts.store');
+        Route::get('/{post:slug}', [DashboardPostController::class, 'show'])->name('dashboard.posts.show');
+        Route::get('/{post:slug}/edit', [DashboardPostController::class, 'edit'])->name('dashboard.posts.edit');
+        Route::patch('/{post:slug}', [DashboardPostController::class, 'update'])->name('dashboard.posts.update');
+        Route::delete('/{post:slug}', [DashboardPostController::class, 'destroy'])->name('dashboard.posts.destroy');
+    });
+});
+
 // Route::post('/blog', [PostController::class, 'store']);
 // Route::put('/blog/{id}', [PostController::class, 'update']);
 // Route::delete('/blog/{id}', [PostController::class, 'destroy']);
