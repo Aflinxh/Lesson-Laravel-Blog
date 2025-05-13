@@ -6,9 +6,10 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DashboardPostController;
-use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\DashboardAccountController;
 
 Route::get('/', function () {
     return view('index', [
@@ -25,7 +26,7 @@ Route::get('/about', function () {
 });
 
 Route::get('/posts', [PostController::class, 'index']);
-Route::get('/posts/{post:slug}', [PostController::class, 'show']);
+Route::get('/posts/{post:slug}', [PostController::class, 'show'])->name('posts.show');
 
 Route::get('/categories', function () {
     return view('categories', [
@@ -49,10 +50,18 @@ Route::prefix('/dashboard')->middleware('auth')->group(function() {
         Route::get('/', [DashboardPostController::class, 'index'])->name('dashboard.posts.index');
         Route::get('/create', [DashboardPostController::class, 'create'])->name('dashboard.posts.create');
         Route::post('/', [DashboardPostController::class, 'store'])->name('dashboard.posts.store');
-        Route::get('/{post:slug}', [DashboardPostController::class, 'show'])->name('dashboard.posts.show');
+        // Route::get('/{post:slug}', [DashboardPostController::class, 'show'])->name('dashboard.posts.show');
         Route::get('/{post:slug}/edit', [DashboardPostController::class, 'edit'])->name('dashboard.posts.edit');
-        Route::patch('/{post:slug}', [DashboardPostController::class, 'update'])->name('dashboard.posts.update');
+        Route::put('/{post:slug}', [DashboardPostController::class, 'update'])->name('dashboard.posts.update');
         Route::delete('/{post:slug}', [DashboardPostController::class, 'destroy'])->name('dashboard.posts.destroy');
+    });
+
+    Route::prefix('/myaccount')->group(function() {
+        Route::get('/', [DashboardAccountController::class, 'myAccount'])->name('dashboard.myaccount');
+        Route::put('/', [DashboardAccountController::class, 'updateMyAccount'])->name('dashboard.myaccount.update');
+        Route::put('/password', [DashboardAccountController::class, 'updateMyPassword'])->name('dashboard.myaccount.password');
+        Route::delete('/data', [DashboardAccountController::class, 'eraseAllData'])->name('dashboard.myaccount.erase');
+        Route::delete('/', [DashboardAccountController::class, 'destroy'])->name('dashboard.myaccount.destroy');
     });
 });
 

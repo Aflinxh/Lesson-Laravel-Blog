@@ -27,7 +27,7 @@
                         <td>{{ $post->created_at->diffForHumans() }}</td>
                         <td>{{ $post->updated_at->diffForHumans() }}</td>
                         <td>
-                            <a href="{{ route('dashboard.posts.show', $post) }}" class="btn btn-info btn-sm">View</a>
+                            <a href="{{ route('posts.show', $post) }}" class="btn btn-info btn-sm">View</a>
                             <a href="{{ route('dashboard.posts.edit', $post) }}" class="btn btn-warning btn-sm">Edit</a>
                             <form action="{{ route('dashboard.posts.destroy', $post) }}" method="POST" style="display:inline;">
                                 @csrf

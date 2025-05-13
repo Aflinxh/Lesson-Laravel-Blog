@@ -22,12 +22,18 @@
                 </li>
             </ul>
             <ul class="navbar-nav ms-auto text-decoration-none">
-                <li class="nav-item me-3">
-                    <a href="/register" class="text-decoration-none"><i class="bi-person-fill-up"></i> Register</a>
-                </li>
-                <li class="nav-item">
-                    <a href="/login" class="text-decoration-none"><i class="bi-box-arrow-in-right"></i> Login</a>
-                </li>
+                @auth
+                    <li class="nav-item">
+                        <a href="/dashboard" class="text-decoration-none"><i class="bi bi-house-door-fill"></i> Dashboard</a>
+                    </li>
+                @else
+                    <li class="nav-item me-3">
+                        <a href="/register" class="text-decoration-none"><i class="bi-person-fill-up"></i> Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/login" class="text-decoration-none"><i class="bi-box-arrow-in-right"></i> Login</a>
+                    </li>
+                @endauth
             </ul>
         </div>
     </div>
